@@ -22,7 +22,7 @@ class TiHe(QtWidgets.QMainWindow):
 
 	def show_sscc(self,):
 		"""Выбор файла для работы, установка root для self"""
-		global work_file
+		global work_file, current_file
 		temp = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file')[0]
 		file_name = temp.split("/")[-1]
 		self.ui.lineEdit.setText(str(file_name))
@@ -32,13 +32,14 @@ class TiHe(QtWidgets.QMainWindow):
 			fs.write(str(current_file.__dict__))
 			os.chdir("..")
 
+current_file = ''
 
 work_file = "into/info_file.txt"
+
 
 app = QtWidgets.QApplication([])
 application = TiHe()
 application.show()
-
 
 
 sys.exit(app.exec())
