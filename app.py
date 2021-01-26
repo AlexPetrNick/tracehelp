@@ -19,8 +19,9 @@ class TiHe(QtWidgets.QMainWindow):
 		self.ui.lineEdit.setText("Выберите файл")
 		self.ui.pushButton.clicked.connect(self.show_sscc) 
 		self.ui.label.setText("Текущий файл")
+		self.ui.pushButton_2.clicked.connect(self.test) 
 
-	def show_sscc(self,):
+	def show_sscc(self):
 		"""Выбор файла для работы, установка root для self"""
 		global work_file, current_file
 		temp = QtWidgets.QFileDialog.getOpenFileName(self, 'Open file')[0]
@@ -31,6 +32,14 @@ class TiHe(QtWidgets.QMainWindow):
 			os.chdir("into")
 			fs.write(str(current_file.__dict__))
 			os.chdir("..")
+
+	def test(self, a):
+		global current_file
+		sscc_i = self.ui.checkBox_2.isChecked()
+		sgtin_i = self.ui.checkBox.isChecked()
+		text = current_file.get_codes(sscc = sscc_i, sgtin = sgtin_i)
+		self.ui.textEdit.setPlaceholderText(str(text))
+
 
 current_file = ''
 
