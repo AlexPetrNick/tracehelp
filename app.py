@@ -28,13 +28,17 @@ class TiHe(QtWidgets.QMainWindow):
 		self.ui.lineEdit.setText("Выберите файл")
 		self.ui.pushButton.clicked.connect(self.show_sscc) 
 		self.ui.pushButton_2.clicked.connect(self.generate)
+		self.ui.checkBox_4.setEnabled(False) 	#Чек на добавление тела
 		self.ui.comboBox.setEnabled(False)
+		self.ui.checkBox_5.setEnabled(False)  #Чек бокс на SSCC
+		self.ui.checkBox_6.setEnabled(False)  #Чек бокс на SGTIN
+
 
 		self.ui.checkBox_3.clicked.connect(self.click_event)
 
 		self.ui.checkBox_4.clicked.connect(self.click_event)
 
-		self.ui.pushButton_3.clicked.connect(self.to_tab2)
+		self.ui.pushButton_3.clicked.connect(self.get_doc)
 		
 		
 
@@ -63,6 +67,7 @@ class TiHe(QtWidgets.QMainWindow):
 		text_to_box = ''
 		col_sgtin = self.ui.textEdit_4
 		col_sscc = self.ui.textEdit
+		self.ui.checkBox_4.setEnabled(False) 
 		col_sgtin.clear()
 		col_sscc.clear()
 		global current_file
@@ -70,6 +75,7 @@ class TiHe(QtWidgets.QMainWindow):
 		sgtin_i = self.ui.checkBox.isChecked()
 		dict_codes = current_file.get_codes(sscc = sscc_i, sgtin = sgtin_i)
 		if len(dict_codes["sscc"]) >= 1:
+			self.ui.checkBox_5.setEnabled(True)
 			text_to_box = "SSCC\n"
 			for item in dict_codes["sscc"]:
 				text_to_box += str(item) + "\n"
@@ -79,6 +85,7 @@ class TiHe(QtWidgets.QMainWindow):
 			self.ui.checkBox_5.setEnabled(False)
 
 		if len(dict_codes["sgtin"]) >= 1:
+			self.ui.checkBox_6.setEnabled(True)
 			text_to_box = "SGTIN\n"
 			for item in dict_codes["sgtin"]:
 				text_to_box += str(item) + "\n"
@@ -86,6 +93,10 @@ class TiHe(QtWidgets.QMainWindow):
 		else:
 			text_to_box = ''
 			self.ui.checkBox_6.setEnabled(False)
+
+
+		if self.ui.checkBox_5.isEnabled() or self.ui.checkBox_6.isEnabled():
+			self.ui.checkBox_4.setEnabled(True)	
 
 		temp2 = col_sscc.toPlainText()
 		print(temp2)
@@ -104,6 +115,8 @@ class TiHe(QtWidgets.QMainWindow):
 		"""????????????????????????"""
 		self.ui.tabWidget.indexOf(self.ui.tab_3)
 
+	def get_doc(self):		
+		pass
 
 current_file = ''
 dict_temp = {}
