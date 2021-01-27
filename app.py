@@ -5,6 +5,8 @@ from main import Ui_Form
 from prog import *
 import json
 import re
+import psycopg2
+
 
 
 class AppEncoder(json.JSONEncoder):
@@ -40,8 +42,16 @@ class TiHe(QtWidgets.QMainWindow):
 		self.ui.checkBox_7.setEnabled(False) #Чек на wrapper
 
 		self.ui.checkBox_7.clicked.connect(self.out_in_wrapper)
+
+		self.ui.pushButton_4.clicked.connect(self.connect_to_databases)
 		
-		
+	def connect_to_databases(self):
+		try:
+			conn = psycopg2.connect(dbname=database, user=db_user, password=mypassword, host=localhost)
+		except:
+			print("Fail")
+		finally:
+			self.ui.textEdit_3.setText("Success")	
 
 	def show_sscc(self):
 		"""Выбор файла для работы, установка root для self"""
