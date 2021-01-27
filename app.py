@@ -28,12 +28,15 @@ class TiHe(QtWidgets.QMainWindow):
 		self.ui.lineEdit.setText("Выберите файл")
 		self.ui.pushButton.clicked.connect(self.show_sscc) 
 		self.ui.pushButton_2.clicked.connect(self.generate)
-		self.ui.comboBox.isEnabled(False)
-		self.ui.comboBox_2.isEnabled(False)
-		if self.ui.checkBox_3.isChecked():
-			self.ui.comboBox.isEnabled(True)
-		if self.ui.checkBox_4.isChecked():
-			self.ui.comboBox.isEnabled(True)
+		self.ui.comboBox.setEnabled(False)
+
+		self.ui.checkBox_3.clicked.connect(self.click_event)
+
+		self.ui.checkBox_4.clicked.connect(self.click_event)
+
+		self.ui.pushButton_3.clicked.connect(self.to_tab2)
+		
+		
 
 	def show_sscc(self):
 		"""Выбор файла для работы, установка root для self"""
@@ -60,23 +63,46 @@ class TiHe(QtWidgets.QMainWindow):
 		text_to_box = ''
 		col_sgtin = self.ui.textEdit_4
 		col_sscc = self.ui.textEdit
+		col_sgtin.clear()
+		col_sscc.clear()
 		global current_file
 		sscc_i = self.ui.checkBox_2.isChecked()
-		print(f"sscc_i = {sscc_i}")
 		sgtin_i = self.ui.checkBox.isChecked()
-		print(f"sgtin_i = {sgtin_i}")
 		dict_codes = current_file.get_codes(sscc = sscc_i, sgtin = sgtin_i)
-		text_to_box = "SSCC\n"
-		print(type(dict_codes))
-		for item in dict_codes["sscc"]:
-			text_to_box += str(item) + "\n"
-		col_sscc.setText(text_to_box)
-		text_to_box = "SGTIN\n"
-		for item in dict_codes["sgtin"]:
-			text_to_box += str(item) + "\n"
-		col_sgtin.setText(text_to_box)
+		if len(dict_codes["sscc"]) >= 1:
+			text_to_box = "SSCC\n"
+			for item in dict_codes["sscc"]:
+				text_to_box += str(item) + "\n"
+			col_sscc.setPlainText(text_to_box)
+		else:
+			text_to_box = ''
+			self.ui.checkBox_5.setEnabled(False)
 
+		if len(dict_codes["sgtin"]) >= 1:
+			text_to_box = "SGTIN\n"
+			for item in dict_codes["sgtin"]:
+				text_to_box += str(item) + "\n"
+			col_sgtin.setPlainText(text_to_box)
+		else:
+			text_to_box = ''
+			self.ui.checkBox_6.setEnabled(False)
 
+		temp2 = col_sscc.toPlainText()
+		print(temp2)
+ 
+
+	def click_event(self, what):
+		check_one = self.ui.checkBox_3.isChecked()
+		check_two = self.ui.checkBox_4.isChecked()
+		if check_one or check_two:
+			self.ui.comboBox.setEnabled(True)
+		else:
+			self.ui.comboBox.setEnabled(False)
+		
+	
+	def to_tab2(self):
+		"""????????????????????????"""
+		self.ui.tabWidget.indexOf(self.ui.tab_3)
 
 
 current_file = ''

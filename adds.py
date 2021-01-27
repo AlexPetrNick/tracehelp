@@ -124,3 +124,7 @@ def get_sscc_sgtin(root, sscc = False, sgtin = False):
             for item in root.iter("sgtin"):
                 text_all += item.text + "\n"
         return text_all
+
+def serialize_to_file(file):
+    curr_file = DocXML(file)
+    

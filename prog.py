@@ -8,15 +8,20 @@ class DocXML(XML):
         list_sscc = []
         list_sgtin = []
         temp_dict = {"sscc":[], "sgtin":[]}
+        
         if sscc:
             for item in self.root.iter("sscc"):
                 list_sscc.append(item.text)
         temp_dict['sscc'] = list_sscc
+        
         if sgtin:
             for item in self.root.iter("sgtin"):
                 list_sgtin.append(item.text)
         temp_dict['sgtin'] = list_sgtin
         return temp_dict
+
+
+        
     def get_info(self):
         """Получить информацию какие ошибки, и их количество"""
         err_dict = {}
