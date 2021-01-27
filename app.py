@@ -32,13 +32,12 @@ class TiHe(QtWidgets.QMainWindow):
 		self.ui.comboBox.setEnabled(False)
 		self.ui.checkBox_5.setEnabled(False)  #Чек бокс на SSCC
 		self.ui.checkBox_6.setEnabled(False)  #Чек бокс на SGTIN
-
-
 		self.ui.checkBox_3.clicked.connect(self.click_event)
-
 		self.ui.checkBox_4.clicked.connect(self.click_event)
-
 		self.ui.pushButton_3.clicked.connect(self.get_doc)
+		self.ui.checkBox_7.setEnabled(False) #Чек на wrapper
+
+		self.ui.checkBox_7.clicked.connect(self.get_wrapper)
 		
 		
 
@@ -54,13 +53,7 @@ class TiHe(QtWidgets.QMainWindow):
 			os.chdir("into")
 			fs.write(str(dict_temp))
 			os.chdir("..")
-
-		row_info = self.ui.textEdit_5
-		row_text = current_file.type_file
-
-		row_info.setText(row_text)
 		
-
 
 	def generate(self, a):
 		dict_codes = {}
@@ -76,6 +69,7 @@ class TiHe(QtWidgets.QMainWindow):
 		dict_codes = current_file.get_codes(sscc = sscc_i, sgtin = sgtin_i)
 		if len(dict_codes["sscc"]) >= 1:
 			self.ui.checkBox_5.setEnabled(True)
+			self.ui.checkBox_7.setEnabled(True)
 			text_to_box = "SSCC\n"
 			for item in dict_codes["sscc"]:
 				text_to_box += str(item) + "\n"
@@ -83,9 +77,12 @@ class TiHe(QtWidgets.QMainWindow):
 		else:
 			text_to_box = ''
 			self.ui.checkBox_5.setEnabled(False)
+			self.ui.checkBox_7.setEnabled(False)
+
 
 		if len(dict_codes["sgtin"]) >= 1:
 			self.ui.checkBox_6.setEnabled(True)
+			self.ui.checkBox_7.setEnabled(True)
 			text_to_box = "SGTIN\n"
 			for item in dict_codes["sgtin"]:
 				text_to_box += str(item) + "\n"
@@ -93,13 +90,12 @@ class TiHe(QtWidgets.QMainWindow):
 		else:
 			text_to_box = ''
 			self.ui.checkBox_6.setEnabled(False)
+			self.ui.checkBox_7.setEnabled(False)
 
 
 		if self.ui.checkBox_5.isEnabled() or self.ui.checkBox_6.isEnabled():
 			self.ui.checkBox_4.setEnabled(True)	
 
-		temp2 = col_sscc.toPlainText()
-		print(temp2)
  
 
 	def click_event(self, what):
@@ -117,6 +113,22 @@ class TiHe(QtWidgets.QMainWindow):
 
 	def get_doc(self):		
 		pass
+
+	def get_wrapper(self):
+		text_sgtin = self.ui.textEdit_4.toPlainText().split("\n")
+		text_sscc = self.ui.textEdit.toPlainText().split("\n")
+
+		print(text_sscc + text_sgtin)
+
+		for i in range(len(text_sscc) - 1):
+			text_sscc[i] = "<sscc>" + str(item) + "</sscc>\n"
+			#item = "<sscc>" + str(item) + "</sscc>\n"
+		for item in text_sgtin:
+			print(item)
+			item = "<sgtin>" + str(item) + "</sgtin>\n"  
+
+		self.ui.textEdit_4.setPlainText(str(text_sgtin))
+		self.ui.textEdit.setPlainText(str(text_sscc))
 
 current_file = ''
 dict_temp = {}

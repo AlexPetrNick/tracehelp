@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>626</width>
-    <height>562</height>
+    <height>591</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,7 +38,7 @@
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>10</x>
      <y>100</y>
      <width>591</width>
      <height>441</height>
@@ -49,15 +49,15 @@
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
-     <string>Tab 1</string>
+     <string>Инициализация</string>
     </attribute>
     <widget class="QTextEdit" name="textEdit">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>120</y>
-       <width>281</width>
-       <height>281</height>
+       <y>40</y>
+       <width>261</width>
+       <height>361</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -68,30 +68,20 @@
      <property name="geometry">
       <rect>
        <x>300</x>
-       <y>120</y>
+       <y>40</y>
        <width>271</width>
-       <height>281</height>
+       <height>361</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">color: white;</string>
      </property>
     </widget>
-    <widget class="QTextEdit" name="textEdit_5">
+    <widget class="QLabel" name="label_2">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>561</width>
-       <height>81</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_2">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>99</y>
        <width>41</width>
        <height>16</height>
       </rect>
@@ -110,8 +100,8 @@
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
-       <x>340</x>
-       <y>100</y>
+       <x>300</x>
+       <y>10</y>
        <width>47</width>
        <height>13</height>
       </rect>
@@ -130,8 +120,8 @@
     <widget class="QCheckBox" name="checkBox_5">
      <property name="geometry">
       <rect>
-       <x>90</x>
-       <y>100</y>
+       <x>60</x>
+       <y>10</y>
        <width>101</width>
        <height>17</height>
       </rect>
@@ -143,8 +133,8 @@
     <widget class="QCheckBox" name="checkBox_6">
      <property name="geometry">
       <rect>
-       <x>390</x>
-       <y>100</y>
+       <x>340</x>
+       <y>10</y>
        <width>91</width>
        <height>17</height>
       </rect>
@@ -156,7 +146,7 @@
    </widget>
    <widget class="QWidget" name="tab_2">
     <attribute name="title">
-     <string>Tab 2</string>
+     <string>Готовый файл</string>
     </attribute>
     <widget class="QTextEdit" name="textEdit_2">
      <property name="geometry">
@@ -334,6 +324,22 @@ color: white;</string>
    </property>
    <property name="text">
     <string> К документу</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBox_7">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>560</y>
+     <width>141</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: white;</string>
+   </property>
+   <property name="text">
+    <string>Добавить теги к кодам</string>
    </property>
   </widget>
  </widget>
