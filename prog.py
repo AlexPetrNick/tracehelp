@@ -5,14 +5,18 @@ from errors import *
 class DocXML(XML):
     def get_codes(self, sscc = False, sgtin = False):
         """Получить sscc или sgtin"""
-        list = []
+        list_sscc = []
+        list_sgtin = []
+        temp_dict = {"sscc":[], "sgtin":[]}
         if sscc:
             for item in self.root.iter("sscc"):
-                list.append(item.text)
+                list_sscc.append(item.text)
+        temp_dict['sscc'] = list_sscc
         if sgtin:
             for item in self.root.iter("sgtin"):
-                list.append(item.text)
-        return list
+                list_sgtin.append(item.text)
+        temp_dict['sgtin'] = list_sgtin
+        return temp_dict
     def get_info(self):
         """Получить информацию какие ошибки, и их количество"""
         err_dict = {}

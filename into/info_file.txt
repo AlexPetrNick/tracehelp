@@ -1,1 +1,1 @@
-{'file': 'fns-156091-912 (2).xml', 'root': <Element 'documents' at 0x7ffa13782a48>, 'list_tags': ['documents', 'unit_unpack', 'subject_id', 'operation_date', 'sscc'], 'type_file': 'Р¤Р°Р№Р» РґР»СЏ РѕС‚РїСЂР°РІРєРё'}
+{'file': 'fns-156091-912 (2).xml', 'root': <Element 'documents' at 0x0000000002DB3540>, 'list_tags': ['documents', 'unit_unpack', 'subject_id', 'operation_date', 'sscc'], 'type_file': 'Файл для отправки'}
