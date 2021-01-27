@@ -40,6 +40,9 @@ class TiHe(QtWidgets.QMainWindow):
 		text = current_file.get_codes(sscc = sscc_i, sgtin = sgtin_i)
 		self.ui.textEdit.setPlaceholderText(str(text))
 
+	def help():
+		print("help")
+
 
 current_file = ''
 
