@@ -4,6 +4,7 @@ from PyQt5.QtGui import QIcon
 from main import Ui_Form
 from prog import *
 import json
+import re
 
 
 class AppEncoder(json.JSONEncoder):
@@ -25,6 +26,7 @@ class TiHe(QtWidgets.QMainWindow):
 		self.ui.textEdit_4.setPlaceholderText("Тут отображаются SGTIN")
 		self.ui.pushButton.setText("Обзор")
 		self.ui.pushButton_2.setText("Генерировать")
+		self.ui.pushButton_2.setEnabled(False)
 		self.ui.lineEdit.setText("Выберите файл")
 		self.ui.pushButton.clicked.connect(self.show_sscc) 
 		self.ui.pushButton_2.clicked.connect(self.generate)
@@ -37,7 +39,7 @@ class TiHe(QtWidgets.QMainWindow):
 		self.ui.pushButton_3.clicked.connect(self.get_doc)
 		self.ui.checkBox_7.setEnabled(False) #Чек на wrapper
 
-		self.ui.checkBox_7.clicked.connect(self.get_wrapper)
+		self.ui.checkBox_7.clicked.connect(self.out_in_wrapper)
 		
 		
 
@@ -49,6 +51,8 @@ class TiHe(QtWidgets.QMainWindow):
 		self.ui.lineEdit.setText(str(file_name))
 		current_file = DocXML(file_name)
 		dict_temp = current_file.__dict__
+		if dict_temp != '':
+			self.ui.pushButton_2.setEnabled(True)
 		with open(work_file, "w") as fs:
 			os.chdir("into")
 			fs.write(str(dict_temp))
@@ -76,6 +80,7 @@ class TiHe(QtWidgets.QMainWindow):
 			col_sscc.setPlainText(text_to_box)
 		else:
 			text_to_box = ''
+			col_sscc.setEnabled(False)
 			self.ui.checkBox_5.setEnabled(False)
 			self.ui.checkBox_7.setEnabled(False)
 
@@ -89,8 +94,12 @@ class TiHe(QtWidgets.QMainWindow):
 			col_sgtin.setPlainText(text_to_box)
 		else:
 			text_to_box = ''
+			col_sgtin.setEnabled(False)
 			self.ui.checkBox_6.setEnabled(False)
-			self.ui.checkBox_7.setEnabled(False)
+			if self.ui.checkBox_7.isEnabled():
+				self.ui.checkBox_7.setEnabled(True)
+			else:
+				self.ui.checkBox_7.setEnabled(False)
 
 
 		if self.ui.checkBox_5.isEnabled() or self.ui.checkBox_6.isEnabled():
@@ -114,21 +123,56 @@ class TiHe(QtWidgets.QMainWindow):
 	def get_doc(self):		
 		pass
 
-	def get_wrapper(self):
-		text_sgtin = self.ui.textEdit_4.toPlainText().split("\n")
-		text_sscc = self.ui.textEdit.toPlainText().split("\n")
+	def out_in_wrapper(self):
+		l_cols = self.ui.textEdit
+		r_cols = self.ui.textEdit_4
 
-		print(text_sscc + text_sgtin)
+		i_sscc = True
+		i_sgtin = True
+		print(self.ui.checkBox_7.isChecked())
 
-		for i in range(len(text_sscc) - 1):
-			text_sscc[i] = "<sscc>" + str(item) + "</sscc>\n"
-			#item = "<sscc>" + str(item) + "</sscc>\n"
-		for item in text_sgtin:
-			print(item)
-			item = "<sgtin>" + str(item) + "</sgtin>\n"  
+		if self.ui.checkBox_7.isChecked():
 
-		self.ui.textEdit_4.setPlainText(str(text_sgtin))
-		self.ui.textEdit.setPlainText(str(text_sscc))
+			list_sgtin = r_cols.toPlainText().split("\n")
+			list_sscc = l_cols.toPlainText().split("\n")
+			text_sgtin = ''
+			text_sscc = ''
+			if  len(list_sscc) >= 1:
+				text_sscc = 'SSCC\n'
+				for item in list_sscc:
+					if item != '' and item != "SSCC":
+						text_sscc += "<sscc>" + str(item) + "</sscc>\n"
+			if  len(list_sgtin) >= 3:
+				text_sgtin = 'SGTIN\n'
+				for item in list_sgtin:
+					if item != '' and item != "SGTIN":
+						text_sgtin += "<sgtin>" + str(item) + "</sgtin>\n"
+
+			r_cols.setPlainText(text_sgtin)
+			l_cols.setPlainText(text_sscc)
+		else:
+			text_sgtin = ''
+			text_sscc = ''
+
+			list_sscc = l_cols.toPlainText().split("\n")
+
+
+
+			"""temp_dict = current_file.get_codes(sscc = True, sgtin = True)
+									
+												if  len(temp_dict["sscc"]) >= 1:
+													text_sscc = 'SSCC\n'
+													for item in temp_dict["sscc"]:
+														text_sscc += str(item) + "\n"
+												if  len(temp_dict["sgtin"]) >= 1:
+													text_sgtin = 'SGTIN\n'
+													for item in temp_dict["sgtin"]:
+														text_sgtin += str(item) + "\n"
+									
+									
+												r_cols.setPlainText(text_sgtin)
+												l_cols.setPlainText(text_sscc)"""
+
 
 current_file = ''
 dict_temp = {}

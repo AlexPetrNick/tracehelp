@@ -1,1 +1,1 @@
-{'file': 'fns-50410-915.xml', 'root': <Element 'documents' at 0x0000000002EA09F0>, 'list_tags': ['documents', 'multi_pack', 'subject_id', 'operation_date', 'by_sgtin', 'detail', 'sscc', 'content', 'sgtin'], 'type_file': 'Файл для отправки'}
+{'file': 'fns-50410-915.xml', 'root': <Element 'documents' at 0x0000000002E9FB30>, 'list_tags': ['documents', 'multi_pack', 'subject_id', 'operation_date', 'by_sgtin', 'detail', 'sscc', 'content', 'sgtin'], 'type_file': 'Файл для отправки'}

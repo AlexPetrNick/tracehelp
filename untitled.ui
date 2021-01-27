@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>626</width>
+    <width>683</width>
     <height>591</height>
    </rect>
   </property>
@@ -21,7 +21,7 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>131</width>
+     <width>141</width>
      <height>21</height>
     </rect>
    </property>
@@ -40,7 +40,7 @@
     <rect>
      <x>10</x>
      <y>100</y>
-     <width>591</width>
+     <width>661</width>
      <height>441</height>
     </rect>
    </property>
@@ -69,7 +69,7 @@
       <rect>
        <x>300</x>
        <y>40</y>
-       <width>271</width>
+       <width>331</width>
        <height>361</height>
       </rect>
      </property>
@@ -178,15 +178,19 @@
   <widget class="QFrame" name="frame">
    <property name="geometry">
     <rect>
-     <x>440</x>
+     <x>160</x>
      <y>10</y>
-     <width>161</width>
-     <height>91</height>
+     <width>141</width>
+     <height>71</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">QWidget {
+    <string notr="true">QFrame {
 	background-color: gray;
+}
+QFrame:hover {
+	background-color: gray;
+	border: 1px solid green;
 }</string>
    </property>
    <property name="frameShape">
@@ -198,11 +202,14 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>10</y>
       <width>121</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: gray;</string>
     </property>
     <property name="text">
      <string>PushButton</string>
@@ -211,11 +218,14 @@
    <widget class="QCheckBox" name="checkBox">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>50</y>
-      <width>70</width>
+      <width>51</width>
       <height>17</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: gray;</string>
     </property>
     <property name="text">
      <string>SGTIN</string>
@@ -224,11 +234,14 @@
    <widget class="QCheckBox" name="checkBox_2">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>80</x>
       <y>50</y>
-      <width>70</width>
+      <width>51</width>
       <height>17</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: gray;</string>
     </property>
     <property name="text">
      <string>SSCC</string>
@@ -238,10 +251,10 @@
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>10</y>
-     <width>281</width>
-     <height>20</height>
+     <x>10</x>
+     <y>40</y>
+     <width>141</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -250,73 +263,13 @@ border-color:2b2b2b;
 background-color: gray;</string>
    </property>
   </widget>
-  <widget class="QCheckBox" name="checkBox_3">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>40</y>
-     <width>141</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Добавить шапку</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="comboBox">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>70</y>
-     <width>141</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">background-color: gray;
-color: white;</string>
-   </property>
-   <item>
-    <property name="text">
-     <string>915</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>913</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>313</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>912</string>
-    </property>
-   </item>
-  </widget>
-  <widget class="QCheckBox" name="checkBox_4">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>40</y>
-     <width>121</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Добавить тело</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>320</x>
-     <y>50</y>
+     <x>310</x>
+     <y>90</y>
      <width>111</width>
-     <height>31</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -341,6 +294,97 @@ color: white;</string>
    <property name="text">
     <string>Добавить теги к кодам</string>
    </property>
+  </widget>
+  <widget class="QFrame" name="frame_2">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>10</y>
+     <width>341</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QFrame {
+	background-color: gray;
+}
+QFrame:hover {
+	background-color: gray;
+	border: 1px solid green;
+}</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QCheckBox" name="checkBox_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>141</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: gray;</string>
+    </property>
+    <property name="text">
+     <string>Добавить шапку</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>10</y>
+      <width>141</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: black;
+color: white;</string>
+    </property>
+    <item>
+     <property name="text">
+      <string>915</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>913</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>313</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>912</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>121</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: gray;</string>
+    </property>
+    <property name="text">
+     <string>Добавить тело</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
