@@ -67,10 +67,44 @@ class TiHe(QtWidgets.QMainWindow):
 			os.chdir("into")
 			fs.write(str(dict_temp))
 			os.chdir("..")
-		
+
+	def func_for_generate_sscc_sgtin(self, dictionary):
+		dict_codes = dictionary
+		if len(dict_codes["sscc"]) >= 1:
+			print("success")
+			self.ui.checkBox_5.setEnabled(True)
+			self.ui.checkBox_7.setEnabled(True)
+			text_to_box = "SSCC\n"
+			for item in dict_codes["sscc"]:
+				text_to_box += str(item) + "\n"
+			self.ui.textEdit.setPlainText(text_to_box)
+		else:
+			text_to_box = ''
+			self.ui.textEdit.setEnabled(False)
+			self.ui.checkBox_5.setEnabled(False)
+			self.ui.checkBox_7.setEnabled(False)
+		if len(dict_codes["sgtin"]) >= 1:
+			print("success!!!")
+			self.ui.checkBox_6.setEnabled(True)
+			self.ui.checkBox_7.setEnabled(True)
+			text_to_box = "SGTIN\n"
+			for item in dict_codes["sgtin"]:
+				text_to_box += str(item) + "\n"
+			self.ui.textEdit_4.setPlainText(text_to_box)
+		else:
+			text_to_box = ''
+			self.ui.textEdit_4.setEnabled(False)
+			self.ui.checkBox_6.setEnabled(False)
+			if self.ui.checkBox_7.isEnabled():
+				self.ui.checkBox_7.setEnabled(True)
+			else:
+				self.ui.checkBox_7.setEnabled(False)
+		if self.ui.checkBox_5.isEnabled() or self.ui.checkBox_6.isEnabled():
+			self.ui.checkBox_4.setEnabled(True)	
 
 	def generate(self, a):
-		dict_codes = {}
+		"""Генерировать SSCC и SGTIN по галочке"""
+		dict_codes = {}	
 		text_to_box = ''
 		col_sgtin = self.ui.textEdit_4
 		col_sscc = self.ui.textEdit
@@ -80,42 +114,22 @@ class TiHe(QtWidgets.QMainWindow):
 		global current_file
 		sscc_i = self.ui.checkBox_2.isChecked()
 		sgtin_i = self.ui.checkBox.isChecked()
-		dict_codes = current_file.get_codes(sscc = sscc_i, sgtin = sgtin_i)
-		if len(dict_codes["sscc"]) >= 1:
-			self.ui.checkBox_5.setEnabled(True)
-			self.ui.checkBox_7.setEnabled(True)
-			text_to_box = "SSCC\n"
-			for item in dict_codes["sscc"]:
-				text_to_box += str(item) + "\n"
-			col_sscc.setPlainText(text_to_box)
+		if current_file.type_file == "Файл для отправки":
+			dict_codes = current_file.get_codes(sscc = sscc_i, sgtin = sgtin_i)
+			self.func_for_generate_sscc_sgtin(dict_codes)
+		elif current_file.type_file == "Ответ(тикет)":
+			list_codes = current_file.root.iter("object_id")
+			dict_codes = { "sscc" : [], "sgtin" : [] }
+			for item in list_codes:
+				if len(item) == 18:
+					dict_codes["sscc"].append(item)
+				elif len(item) == 27:
+					dict_codes["sgtin"].append(item)
+			self.func_for_generate_sscc_sgtin(dict_codes)
 		else:
-			text_to_box = ''
-			col_sscc.setEnabled(False)
-			self.ui.checkBox_5.setEnabled(False)
-			self.ui.checkBox_7.setEnabled(False)
+ 			pass
 
-
-		if len(dict_codes["sgtin"]) >= 1:
-			self.ui.checkBox_6.setEnabled(True)
-			self.ui.checkBox_7.setEnabled(True)
-			text_to_box = "SGTIN\n"
-			for item in dict_codes["sgtin"]:
-				text_to_box += str(item) + "\n"
-			col_sgtin.setPlainText(text_to_box)
-		else:
-			text_to_box = ''
-			col_sgtin.setEnabled(False)
-			self.ui.checkBox_6.setEnabled(False)
-			if self.ui.checkBox_7.isEnabled():
-				self.ui.checkBox_7.setEnabled(True)
-			else:
-				self.ui.checkBox_7.setEnabled(False)
-
-
-		if self.ui.checkBox_5.isEnabled() or self.ui.checkBox_6.isEnabled():
-			self.ui.checkBox_4.setEnabled(True)	
-
- 
+	
 
 	def click_event(self, what):
 		check_one = self.ui.checkBox_3.isChecked()
@@ -124,11 +138,6 @@ class TiHe(QtWidgets.QMainWindow):
 			self.ui.comboBox.setEnabled(True)
 		else:
 			self.ui.comboBox.setEnabled(False)
-		
-	
-	def to_tab2(self):
-		"""????????????????????????"""
-		self.ui.tabWidget.indexOf(self.ui.tab_3)
 
 	def get_doc(self):		
 		pass
@@ -139,7 +148,6 @@ class TiHe(QtWidgets.QMainWindow):
 
 		i_sscc = True
 		i_sgtin = True
-		print(self.ui.checkBox_7.isChecked())
 
 		if self.ui.checkBox_7.isChecked():
 
@@ -164,24 +172,18 @@ class TiHe(QtWidgets.QMainWindow):
 			text_sgtin = ''
 			text_sscc = ''
 
-			list_sscc = l_cols.toPlainText().split("\n")
+			list_sscc = l_cols.toPlainText().split("<sscc>")
+			list_sgtin = r_cols.toPlainText().split("<sgtin>")
+			if len(list_sscc) >- 1:
+				for i in range(0, len(list_sscc)):
+					text_sscc += list_sscc[i].replace("</sscc>", "")
+			if len(list_sgtin) >- 1:
+				for i in range(0, len(list_sgtin)):
+					text_sgtin += list_sgtin[i].replace("</sgtin>", "")
 
+			r_cols.setPlainText(text_sgtin)
+			l_cols.setPlainText(text_sscc)
 
-
-			"""temp_dict = current_file.get_codes(sscc = True, sgtin = True)
-									
-												if  len(temp_dict["sscc"]) >= 1:
-													text_sscc = 'SSCC\n'
-													for item in temp_dict["sscc"]:
-														text_sscc += str(item) + "\n"
-												if  len(temp_dict["sgtin"]) >= 1:
-													text_sgtin = 'SGTIN\n'
-													for item in temp_dict["sgtin"]:
-														text_sgtin += str(item) + "\n"
-									
-									
-												r_cols.setPlainText(text_sgtin)
-												l_cols.setPlainText(text_sscc)"""
 
 
 current_file = ''

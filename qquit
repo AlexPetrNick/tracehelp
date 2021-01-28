@@ -1,0 +1,25 @@
+commit ffb06669c11e97e8be54bf24048a0f51f65012b8 (HEAD -> main, origin/main, orig
+in/HEAD)
+Author: AlexPetrNick <alexandernick20200901@gmail.com>
+Date:   Wed Jan 27 20:36:52 2021 +0400
+
+    dodbcon
+
+commit e4fa8701be1fbf31d23e5d63eaf8bcce6caf6200
+Author: AlexPetrNick <alexandernick20200901@gmail.com>
+Date:   Wed Jan 27 19:19:18 2021 +0400
+
+    WorkToInvisibleSSCC1SGTIN
+
+commit fdc07aadee7f4de404b5d3fbf286f78560c5c426
+Author: AlexPetrNick <alexandernick20200901@gmail.com>
+Date:   Wed Jan 27 17:38:27 2021 +0400
+
+    Необходимо создание wrapper
+
+commit 57bdb75e257bba5375fb4879e0cfdba2c3ed95e7
+Author: AlexPetrNick <alexandernick20200901@gmail.com>
+Date:   Wed Jan 27 16:24:35 2021 +0400
+
+    GenerateDocToWork
+
