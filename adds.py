@@ -128,3 +128,33 @@ def get_sscc_sgtin(root, sscc = False, sgtin = False):
 def serialize_to_file(file):
     curr_file = DocXML(file)
     
+
+def copy_in_variable(text):
+    a = text
+    print(a)
+    return a
+
+
+class UserDB:
+    connect = None
+    def __init__(self, databasename, in_user, my_password, host_con):
+        self.databasename = databasename
+        self.in_user = in_user
+        self.my_password = my_password
+        self.host_con = host_con
+
+    def return_param(self):
+        dict_temp = {
+        "databasename" : databasename,
+        "in_user" : in_user,
+        "my_password" : my_password,
+        "host_con" : host_con
+        }
+        return dict_temp
+
+    def init_connect(self, conn):
+        connect = conn
+
+    def disinit_connect(self, conn):
+        connect = conn
+        connect.close()

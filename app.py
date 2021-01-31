@@ -43,15 +43,29 @@ class TiHe(QtWidgets.QMainWindow):
 
 		self.ui.checkBox_7.clicked.connect(self.out_in_wrapper)
 
-		self.ui.pushButton_4.clicked.connect(self.connect_to_databases)
-		
+
+
+	@QtCore.pyqtSlot()	
 	def connect_to_databases(self):
+		port1 = "61532"
+		host1 = "192.168.100.213"
+		db = "itrack2"
+		name1 = "itrack"
+		pa = "itrack"
+		global my_db, connect
 		try:
-			conn = psycopg2.connect(dbname=database, user=db_user, password=mypassword, host=localhost)
+			connect = psycopg2.connect(dbname=db,user=name1,password=pa,host=host1,port = port1)
+			print(connect)
 		except:
 			print("Fail")
-		finally:
-			self.ui.textEdit_3.setText("Success")	
+		print("!!!!")
+
+	@QtCore.pyqtSlot()	
+	def disconnect_to_databases(self):
+		pass
+
+								
+
 
 	def show_sscc(self):
 		"""Выбор файла для работы, установка root для self"""
@@ -185,6 +199,8 @@ class TiHe(QtWidgets.QMainWindow):
 			l_cols.setPlainText(text_sscc)
 
 
+connect = None
+my_db = None
 
 current_file = ''
 dict_temp = {}
@@ -195,5 +211,6 @@ app = QtWidgets.QApplication([])
 application = TiHe()
 application.show()
 
+application.ui.pushButton_4.clicked.connect(application.connect_to_databases)
 
 sys.exit(app.exec())
