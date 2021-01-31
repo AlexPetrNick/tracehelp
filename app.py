@@ -42,6 +42,7 @@ class TiHe(QtWidgets.QMainWindow):
 		self.ui.checkBox_7.setEnabled(False) #Чек на wrapper
 
 		self.ui.checkBox_7.clicked.connect(self.out_in_wrapper)
+		self.ui.pushButton_3.setEnabled(False)
 
 
 
@@ -55,16 +56,28 @@ class TiHe(QtWidgets.QMainWindow):
 		global my_db, connect
 		try:
 			connect = psycopg2.connect(dbname=db,user=name1,password=pa,host=host1,port = port1)
-			print(connect)
+			self.change_color()
+			self.ui.pushButton_3.setEnabled(True)
 		except:
 			print("Fail")
-		print("!!!!")
+
 
 	@QtCore.pyqtSlot()	
 	def disconnect_to_databases(self):
-		pass
+		global connect
+		connect.close()
+		self.ui.pushButton_3.setEnabled(False)
+		self.change_color()
 
 								
+	def change_color(self):
+		global connect
+		if connect.closed == 0:
+			self.ui.comboBox_2.setStyleSheet("background-color: green;\n"
+"color: gray;")
+		else:
+			self.ui.comboBox_2.setStyleSheet("background-color: red;\n"
+"color: gray;")
 
 
 	def show_sscc(self):
@@ -212,5 +225,8 @@ application = TiHe()
 application.show()
 
 application.ui.pushButton_4.clicked.connect(application.connect_to_databases)
+
+
+application.ui.pushButton_5.clicked.connect(application.disconnect_to_databases)
 
 sys.exit(app.exec())
